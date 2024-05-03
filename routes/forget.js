@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../model/user');
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 router.post("/forget",async(req,res)=>{
   try{
@@ -12,8 +13,15 @@ router.post("/forget",async(req,res)=>{
       console.log(userData.answer1);
       const Id=userData._id;
       console.log(Id);
-        if(req.body.answer1==userData.answer1||req.body.answer2==userData.answer2||req.body.answer3==userData.answer3){
-            const updatePassword=await User.findByIdAndUpdate(Id,req.body.passWord,{new:true});
+        if(req.body.answer1==userData.answer1 && req.body.answer2==userData.answer2 && req.body.answer3==userData.answer3){
+          const newPassword = await bcrypt.hashSync(req.body.passWord, 10);
+          // const newPassword = await req.body.passWord;
+
+          console.log(req.body);
+          console.log(newPassword);
+            const updatePassword=await User.findByIdAndUpdate(Id,{
+              $set:{passWord:newPassword}
+            });
             await updatePassword.save();
             await userData.save();
             console.log(updatePassword,"rrrrrrrr");
