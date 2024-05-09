@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
 const forgetRouter = require("./routes/forget");
+const memberRouter = require("./routes/member");
 const cors = require('cors');
 
 const app = express();
@@ -22,6 +23,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/Eventify")
 app.use("/api", userRouter);
 app.use("/api", loginRouter);
 app.use("/api", forgetRouter);
+app.use("/api", memberRouter);
 
 
 
