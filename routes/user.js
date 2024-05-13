@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
-router.post("/signup", async(req, res) => {
+router.post("/user-signup", async(req, res) => {
 
     const data = await User.findOne({ email: req.body.email });
     if (data) {

@@ -5,7 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 
 
-router.post("/login", async(req, res) => {
+router.post("/user-login", async(req, res) => {
     const loginData = await User.findOne({ email: req.body.email });
 
     if (loginData) {

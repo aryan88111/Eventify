@@ -4,7 +4,7 @@ const express = require('express')
 const bcrypt = require("bcrypt");
 
 ///posting the member data
-router.post("/join-us", async(req, res) => {
+router.post("/member-signup", async(req, res) => {
 
     const data = await Member.findOne({ email: req.body.email });
     if (data) {
@@ -35,7 +35,7 @@ router.post("/join-us", async(req, res) => {
 
 // get alll the members
 
-router.get("/join-us",async(req,res)=>{
+router.get("/member",async(req,res)=>{
 try{
     let memberData=await Member.find();
     if(memberData){
@@ -52,7 +52,7 @@ res.send("errrrrrr")
 });
 
 //get member using id
-router.get("/join-us/:id",async(req,res)=>{
+router.get("/member/:id",async(req,res)=>{
 try{
     const Id=req.params.id;
     let memberData=await Member.findById(Id);
@@ -72,7 +72,7 @@ res.send("errrrrrr")
 
 //update member at perticular id
 
-router.patch("/join-us/:id",async(req,res)=>{
+router.patch("/member/:id",async(req,res)=>{
     try{
         const Id=req.params.id;
         let memberData=await Member.findByIdAndUpdate(Id,req.body,{new:true});
@@ -91,7 +91,7 @@ router.patch("/join-us/:id",async(req,res)=>{
 
 
     ///delete the perticular member
-router.delete("/join-us/:id",async(req,res)=>{
+router.delete("/member/:id",async(req,res)=>{
     try{
         const Id=req.params.id;
         let memberData=await Member.findById(Id);
