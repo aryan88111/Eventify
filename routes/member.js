@@ -2,6 +2,8 @@ const express = require('express')
  const router= express.Router();
  const Member=require("../model/member.js");
 const bcrypt = require("bcrypt");
+
+///posting the member data
 router.post("/join-us", async(req, res) => {
 
     const data = await Member.findOne({ email: req.body.email });
@@ -29,4 +31,82 @@ router.post("/join-us", async(req, res) => {
 
 
 });
+
+
+// get alll the members
+
+router.get("/join-us",async(req,res)=>{
+try{
+    let memberData=await Member.find();
+    if(memberData){
+        res.send(memberData);
+    }
+    else{
+        res.send("No Member is Present")
+    }
+
+}
+catch{
+res.send("errrrrrr")
+}
+});
+
+//get member using id
+router.get("/join-us/:id",async(req,res)=>{
+try{
+    const Id=req.params.id;
+    let memberData=await Member.findById(Id);
+    if(memberData){
+        res.send(memberData);
+    }
+    else{
+        res.send("No Member is Present")
+    }
+
+}
+catch{
+res.send("errrrrrr")
+}
+});
+
+
+//update member at perticular id
+
+router.patch("/join-us/:id",async(req,res)=>{
+    try{
+        const Id=req.params.id;
+        let memberData=await Member.findByIdAndUpdate(Id,req.body,{new:true});
+        if(memberData){
+            res.send(memberData);
+        }
+        else{
+            res.send("No Member is Present")
+        }
+    
+    }
+    catch{
+    res.send("errrrrrr")
+    }
+    });
+
+
+    ///delete the perticular member
+router.delete("/join-us/:id",async(req,res)=>{
+    try{
+        const Id=req.params.id;
+        let memberData=await Member.findById(Id);
+        if(memberData){
+            await Member.findByIdAndDelete(Id)
+            res.send("Member Deleted Successfully");
+        }
+        else{
+            res.send("No Member is Present")
+        }
+    
+    }
+    catch{
+    res.send("errrrrrr")
+    }
+    });
+
 module.exports = router;
