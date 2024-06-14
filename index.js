@@ -8,15 +8,22 @@ const cors = require('cors');
 
 const app = express();
 const port = 7000;
-app.use(express.json({ extended: true })); // Middleware to parse JSON
-app.use(express.urlencoded({ extended: false })); // Middleware to parse the frontend data
-app.use(cors())
+// app.use(express.urlencoded({ extended: false })); // Middleware to parse the frontend data
 mongoose.connect("mongodb://127.0.0.1:27017/Eventify")
     .then(() => {
         console.log("MongoDB Connected");
     }).catch(() => {
         console.log("MongoDB NOt connected");
     });
+
+app.use(cors());
+app.use(express.json({ extended: true })); // Middleware to parse JSON
+
+// app.use(cors({
+//     origin: 'http://localhost:3000', // Replace with your front-end URL
+//     methods: 'GET,POST,PUT,DELETE',
+//     allowedHeaders: 'Content-Type,Authorization'
+//   }));
 
 
 

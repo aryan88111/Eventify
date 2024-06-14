@@ -15,32 +15,33 @@ const memberSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    contact_No:{
-     type:Number,
-     required:true 
+    contact_No: {
+        type: Number,
+        required: true
 
-     },
-    address:{
-    type: String,
-    required: true
     },
-    image:{
+    address: {
         type: String,
         required: true
     },
-    answer1:{
+    image: {
         type: String,
-        // required: true
-    
+        required: true
     },
-    answer2:{
+    answer1: {
+        type: String,
+        // required: true
+
+    },
+    answer2: {
         type: String,
         // required: true
     },
-    answer3:{
+    answer3: {
         type: String,
         // required: true
-    }
+    },
+  
 
 })
 
